@@ -175,4 +175,53 @@ require_relative '../models/address_book.rb'
        expect(entry).to be_nil
      end
    end
+
+   context "#iterative_search" do
+     it "searches AddressBook for a non-existing entry" do
+       book.import_from_csv("entries.csv")
+       entry = book.iterative_search("Dan")
+       expect(entry).to be_nil
+     end
+
+     it "searches AddressBook for Bill" do
+       book.import_from_csv("entries.csv")
+       entry = book.iterative_search("Bill")
+       expect(entry).to be_a Entry
+       check_entry(entry, "Bill", "555.555.5570", "bill@gmail.com")
+     end
+
+     it "searches AddressBook for Al" do
+       book.import_from_csv("entries.csv")
+       entry = book.iterative_search("Al")
+       expect(entry).to be_a Entry
+       check_entry(entry, "Al", "555.555.5571", "al@gmail.com")
+     end
+
+     it "searches AddressBook for Chris" do
+       book.import_from_csv("entries.csv")
+       entry = book.iterative_search("Chris")
+       expect(entry).to be_a Entry
+       check_entry(entry, "Chris", "555.555.5572", "chris@gmail.com")
+     end
+
+     it "searches AddressBook for Phil" do
+       book.import_from_csv("entries.csv")
+       entry = book.iterative_search("Phil")
+       expect(entry).to be_a Entry
+       check_entry(entry, "Phil", "555.555.5573", "phil@gmail.com")
+     end
+
+     it "searches AddressBook for Les" do
+       book.import_from_csv("entries.csv")
+       entry = book.iterative_search("Les")
+       expect(entry).to be_a Entry
+       check_entry(entry, "Les", "555.555.5574", "les@gmail.com")
+     end
+
+     it "searches AddressBook for Alex" do
+       book.import_from_csv("entries.csv")
+       entry = book.iterative_search("Alex")
+       expect(entry).to be_nil
+     end
+   end
 end
