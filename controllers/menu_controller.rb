@@ -7,6 +7,10 @@ class MenuController
     @address_book = AddressBook.new
   end
 
+  def destroy_all
+    @entries = []
+  end
+
   def main_menu
     puts "Main Menu - #{@address_book.entries.count} entries"
     puts "1 - View all entries"
@@ -14,7 +18,8 @@ class MenuController
     puts "3 - Search for an entry"
     puts "4 - Import entries from a CSV"
     puts "5 - View entry n"
-    puts "6 - Exit"
+    puts "6 - Destroy all entries"
+    puts "7 - Exit"
     print "Enter your selection: "
 
     selection = gets.to_i
@@ -41,6 +46,11 @@ class MenuController
       entry_n_submenu
       main_menu
     when 6
+      system "clear"
+      @address_book.destroy_all
+      puts "All entries deleted"
+      main_menu
+    when 7
       puts "Good-bye"
 
       exit(0)
@@ -136,7 +146,7 @@ class MenuController
       search_submenu(entry)
     end
   end
-       
+
   def read_csv
     print "Enter CSV file to import: "
     file_name = gets.chomp
